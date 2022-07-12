@@ -1,15 +1,15 @@
 import React from 'react';
+import LoginScreen from './pages/LoginScreen';
+import SignUpModal from './components/SignUpModal';
+import { Routes, Route } from 'react-router-dom'
 
 function App() {
   return (
     <section>
-      <h1>Hello Slack Clone App</h1>
-      <div>
-        <p>Fey</p>
-        <p>Migs</p>
-        <p>Jay</p>
-        <div>Footer</div>
-      </div>
+       <Routes>
+        <Route path="/" element={ <LoginScreen />} />
+        <Route path="/sign-up-page" element={ <SignUpModal />} />
+     </Routes>
     </section>
   );
 }
