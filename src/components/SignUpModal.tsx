@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from "react-router-dom";
 
 export default function SignUpModal() {
 	const [ userEmail, setUserEmail ] = useState<number | string>()
@@ -7,7 +8,19 @@ export default function SignUpModal() {
 
 	function handleSubmit(e: any) {
 		e.preventDefault()
+		if(confirmPassword != userPassword) {
+			alert('password does not match')
+			return
+		}
 		userSignUp()
+		e.target.reset()
+		resetState()
+	}
+
+	function resetState() {
+		setUserEmail('')
+		setUserPassword('')
+		setConfirmPassword('')
 	}
 
 	const userSignUp = async () => {
@@ -56,6 +69,9 @@ export default function SignUpModal() {
 				<br></br>
 				<input type='submit' />
 			</form>
+			<div>
+				<Link to="/">Click here to Sign-in</Link>
+			</div>
 		</section>
   )
 }
