@@ -1,18 +1,33 @@
 import React, { useState } from 'react'
-import SignUpModal from '../components/SignUpModal'
 import { Link } from "react-router-dom";
 
 export default function LoginScreen() {
-  const [ password, setPassword ] = useState<number | string>()
-  const [ username, setUsername ] = useState<number | string>()
+  const [ loginPassword, setLoginPassword ] = useState<number | string>()
+  const [ loginEmail, setLoginEmail ] = useState<number | string>()
 
   function handleSubmit(e: any) {
     e.preventDefault()
-
+    userLogin()
+    // if(userLogin().errors)
+    e.target.reset()
+    resetState()
   }
 
-  const userLogin =async () => {
-    
+  function resetState() {
+    setLoginPassword('')
+    setLoginEmail('')
+  }
+  
+  const userLogin = async () => {
+      const response = await fetch('http://206.189.91.54/api/v1/auth/sign_in', {
+        body: JSON.stringify({
+          email: loginEmail,
+          password: loginPassword
+        }),
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+      })
+		response.json().then(data => console.log(data))
   }
 
   return (
@@ -22,7 +37,7 @@ export default function LoginScreen() {
           <label htmlFor="">E-mail: </label>
           <br></br>
           <input
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setLoginEmail(e.target.value)}
             type="email" 
             required
           />
@@ -30,7 +45,7 @@ export default function LoginScreen() {
           <label htmlFor="">Password:</label>
           <br></br>
           <input 
-            onChange={(e) => setPassword(e.target.value)}
+            onChange={(e) => setLoginPassword(e.target.value)}
             type="password" 
             required
           />
