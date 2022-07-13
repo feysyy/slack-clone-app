@@ -54,7 +54,7 @@ export default function LoginScreen() {
         </form>
       </div>
       <div>
-        <p>Doesn't have an account yet?</p>
+        <p>Don't have an account yet?</p>
         <Link to="/sign-up-page">Sign up here</Link>
       </div>
     </section>
